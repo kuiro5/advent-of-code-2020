@@ -1,4 +1,16 @@
-i = [
+defmodule Calculator do
+  def sum([_ | next_b] = next_a), do: sum(next_a, next_b)
+
+  def sum([head_a | _], [head_b | _]) when head_a + head_b == 2020 do
+    head_a * head_b
+  end
+
+  def sum([_ | [_ | next_b] = next_a], [_ | []]), do: sum(next_a, next_b)
+
+  def sum(a, [_ | next_b]), do: sum(a, next_b)
+end
+
+[
   1711,
   1924,
   1384,
@@ -200,17 +212,5 @@ i = [
   1806,
   1851
 ]
-
-defmodule Calculator do
-  def sum([_current | rest] = all), do: sum(all, rest)
-
-  def sum([currentA | _restA], [currentB | _restB]) when currentA + currentB == 2020 do
-    currentA * currentB
-  end
-
-  def sum([_currentA | [_nextCurrentA | restA] = next], [_end | []]), do: sum(next, restA)
-
-  def sum(allA, [_currentB | restB]), do: sum(allA, restB)
-end
-
-IO.inspect(Calculator.sum(i))
+|> Calculator.sum()
+|> IO.inspect()

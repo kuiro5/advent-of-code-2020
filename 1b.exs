@@ -1,4 +1,31 @@
-i = [
+defmodule Calculator do
+  def sum([_ | [_ | next_c] = next_b] = next_a) do
+    sum(next_a, next_b, next_c)
+  end
+
+  def sum([head_a | _], [head_b | _], [head_c | _])
+      when head_a + head_b + head_c == 2020 do
+    head_a * head_b * head_c
+  end
+
+  def sum(
+        [_ | [_ | [_ | next_c] = next_b] = next_a],
+        [_ | []],
+        _c
+      ) do
+    sum(next_a, next_b, next_c)
+  end
+
+  def sum(a, [_ | [_ | next_c] = next_b], [_ | []]) do
+    sum(a, next_b, next_c)
+  end
+
+  def sum(a, b, [_ | next_c]) do
+    sum(a, b, next_c)
+  end
+end
+
+[
   1711,
   1924,
   1384,
@@ -200,30 +227,5 @@ i = [
   1806,
   1851
 ]
-
-defmodule Calculator do
-  def sum([_currentA | [_nextB | nextRestB] = allB] = allA), do: sum(allA, allB, nextRestB)
-
-  def sum([currentA | _restA], [currentB | _restB], [currentC | _restC])
-      when currentA + currentB + currentC == 2020 do
-    currentA * currentB * currentC
-  end
-
-  def sum(
-        [_currentA | [_nextCurrentA | [_nextCurrentB | nextRestB] = nextRestA] = next],
-        [_currentB | []],
-        _c
-      ) do
-    sum(next, nextRestA, nextRestB)
-  end
-
-  def sum(allA, [_currentB | [_nextCurrentB | restB] = next], [_currentC | []]) do
-    sum(allA, next, restB)
-  end
-
-  def sum(allA, allB, [_currentC | restC]) do
-    sum(allA, allB, restC)
-  end
-end
-
-IO.inspect(Calculator.sum(i))
+|> Calculator.sum()
+|> IO.inspect()
