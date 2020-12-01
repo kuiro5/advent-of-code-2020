@@ -202,7 +202,7 @@ i = [
 ]
 
 defmodule Calculator do
-  def sum([_current | rest] = input), do: sum(input, rest)
+  def sum([_current | rest] = all), do: sum(all, rest)
 
   def sum([currentA | _restA], [currentB | _restB]) when currentA + currentB == 2020 do
     currentA * currentB
@@ -210,7 +210,7 @@ defmodule Calculator do
 
   def sum([_currentA | [_nextCurrentA | restA] = next], [_end | []]), do: sum(next, restA)
 
-  def sum(input, [_currentB | restB]), do: sum(input, restB)
+  def sum(allA, [_currentB | restB]), do: sum(allA, restB)
 end
 
 IO.inspect(Calculator.sum(i))

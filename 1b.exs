@@ -209,15 +209,15 @@ defmodule Calculator do
     currentA * currentB * currentC
   end
 
-  def sum([currentA | [nextCurrentA | restA] = next], [currentB | []], _c) do
+  def sum([_currentA | [_nextCurrentA | restA] = next], [_currentB | []], _c) do
     sum(next, restA, restA)
   end
 
-  def sum(allA, [currentB | [nextCurrentB | restB] = next], [currentC | []]) do
+  def sum(allA, [_currentB | [_nextCurrentB | restB] = next], [_currentC | []]) do
     sum(allA, next, restB)
   end
 
-  def sum(allA, allB, [currentC | restC]) do
+  def sum(allA, allB, [_currentC | restC]) do
     sum(allA, allB, restC)
   end
 end
