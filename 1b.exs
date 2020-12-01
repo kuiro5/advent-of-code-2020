@@ -202,15 +202,19 @@ i = [
 ]
 
 defmodule Calculator do
-  def sum([_current | rest] = input), do: sum(input, rest, rest)
+  def sum([_current | [_nextA | restA] = allA] = input), do: sum(input, allA, restA)
 
   def sum([currentA | _restA], [currentB | _restB], [currentC | _restC])
       when currentA + currentB + currentC == 2020 do
     currentA * currentB * currentC
   end
 
-  def sum([_currentA | [_nextCurrentA | restA] = next], [_currentB | []], _c) do
-    sum(next, restA, restA)
+  def sum(
+        [_currentA | [_nextCurrentA | [_nextCurrentB | nextRestB] = nextRestA] = next],
+        [_currentB | []],
+        _c
+      ) do
+    sum(next, nextRestA, nextRestB)
   end
 
   def sum(allA, [_currentB | [_nextCurrentB | restB] = next], [_currentC | []]) do
