@@ -1,4 +1,3 @@
-# 616
 defmodule Validator do
   def validate(input) do
     input
