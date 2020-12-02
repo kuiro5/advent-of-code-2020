@@ -7,7 +7,6 @@ defmodule Validator do
     |> String.split("\n")
     |> Enum.map(&String.split(&1, " "))
     |> Enum.filter(&valid?(&1))
-    |> IO.inspect()
     |> length()
   end
 
