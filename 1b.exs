@@ -1,27 +1,27 @@
 defmodule Calculator do
-  def sum([_ | [_ | next_c] = next_b] = next_a) do
-    sum(next_a, next_b, next_c)
+  def calculate([_ | [_ | next_c] = next_b] = next_a) do
+    calculate(next_a, next_b, next_c)
   end
 
-  def sum([head_a | _], [head_b | _], [head_c | _])
+  def calculate([head_a | _], [head_b | _], [head_c | _])
       when head_a + head_b + head_c == 2020 do
     head_a * head_b * head_c
   end
 
-  def sum(
+  def calculate(
         [_ | [_ | [_ | next_c] = next_b] = next_a],
         [_ | []],
         _c
       ) do
-    sum(next_a, next_b, next_c)
+    calculate(next_a, next_b, next_c)
   end
 
-  def sum(a, [_ | [_ | next_c] = next_b], [_ | []]) do
-    sum(a, next_b, next_c)
+  def calculate(a, [_ | [_ | next_c] = next_b], [_ | []]) do
+    calculate(a, next_b, next_c)
   end
 
-  def sum(a, b, [_ | next_c]) do
-    sum(a, b, next_c)
+  def calculate(a, b, [_ | next_c]) do
+    calculate(a, b, next_c)
   end
 end
 
@@ -227,5 +227,5 @@ end
   1806,
   1851
 ]
-|> Calculator.sum()
+|> Calculator.calculate()
 |> IO.inspect()

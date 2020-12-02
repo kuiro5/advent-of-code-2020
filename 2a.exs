@@ -6,11 +6,11 @@ defmodule Validator do
     |> String.replace("-", " ")
     |> String.split("\n")
     |> Enum.map(&String.split(&1, " "))
-    |> Enum.filter(&valid?(&1))
+    |> Enum.filter(&valid_password?(&1))
     |> length()
   end
 
-  def valid?([low, high, value, string] = params) do
+  def valid_password?([low, high, value, string]) do
     frequencies =
       string
       |> String.graphemes()
